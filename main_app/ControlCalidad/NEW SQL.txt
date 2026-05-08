@@ -1,0 +1,70 @@
+
+create database marginaciones;
+CREATE TABLE `margi` (
+  `id` int(11) AUTO_INCREMENT,
+  `NMargi1` varchar(30) NOT NULL,
+  `TxtMargi1` text NOT NULL,
+  `AnioP` varchar(30) NOT NULL,
+  `LibroP` varchar(30) NOT NULL,
+  `NPartida` varchar(30) NOT NULL,
+  `Iniciales1` varchar(30) NOT NULL,
+  `TipoMargi` varchar(30) NOT NULL,
+  `LibroO` varchar(30) NOT NULL,
+  `FolioO` varchar(30) NOT NULL,
+  `FechaC` varchar(30) NOT NULL,
+  `TipoP` varchar(30) NOT NULL,
+  `HoraC` varchar(30) NOT NULL,
+  `busquedalf` varchar(30) NOT NULL,
+  `lineapdf` text NOT NULL,
+  `registrador` text NOT NULL,
+  `nmargpdf` varchar(30) NOT NULL,
+  `cargor` text NOT NULL,
+  `estado` varchar(45) NOT NULL,
+   `Fechae` varchar(30) NOT NULL,
+  `Horae` varchar(30) NOT NULL,
+  `Horae` varchar(30) NOT NULL,
+  `InicialesPDF` varchar(30) NOT NULL,
+  PRIMARY KEY (ID)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE margi ALTER COLUMN lineapdf text NOT NULL;
+
+DROP TABLE margi;
+CREATE TABLE `usuarios` (
+  `id` int(11) AUTO_INCREMENT,
+  `nombre` varchar(45) NOT NULL,
+  `usuario` varchar(30) NOT NULL,
+  `password` varchar(30) NOT NULL,
+  `tipo` varchar(30) NOT NULL,
+  `iniciales` varchar(30) NOT NULL,
+  `fechac` varchar(30) NOT NULL,
+  `horac` varchar(30) NOT NULL,
+  `fechae` varchar(30) NOT NULL,
+    
+      PRIMARY KEY (ID)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ ALTER TABLE `usuarios` ;
+INSERT INTO `usuarios` (`id`, `nombres`, `usuario`, `password`, `tipo`) VALUES
+	(1, 'Mario Daniel Hernandez Ramos', 'MDHR', '123', 'Admin'),
+	(2, 'Michelle Estefania', 'ME', '1234', 'Usuario'),
+	(3, 'Michael Varela', 'MV', '12344', 'Usuario'),
+	(4, 'Jose Cardenas', 'JC', '12345', 'Usuario'),
+	(5, 'Jorge Remache', 'JR', '12345', 'Usuario');
+
+ALTER TABLE margi ADD lineapdf varchar(30) NOT NULL;
+ALTER TABLE margi ADD registrador varchar(30) NOT NULL;
+ALTER TABLE margi ADD nmargpdf varchar(30) NOT NULL;
+ALTER TABLE margi ADD estado varchar(45) NOT NULL;
+alter table usuarios
+  change usuarios usuario varchar(30) not null;
+  
+  ALTER TABLE usuarios  ADD fechac varchar(30) NOT NULL;
+    ALTER TABLE usuarios  ADD horac varchar(30) NOT NULL;
+      ALTER TABLE usuarios  ADD fechae varchar(30) NOT NULL;
+   ALTER TABLE usuarios  ADD horae varchar(30) NOT NULL;
+     ALTER TABLE margi  ADD Fechae varchar(30) NOT NULL;
+   ALTER TABLE margi  ADD Horae varchar(30) NOT NULL;
+     ALTER TABLE margi  ADD InicialesPDF varchar(30) NOT NULL;
+
+  
+

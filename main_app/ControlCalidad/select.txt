@@ -1,0 +1,3 @@
+onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'
+
+agregar a select para convertir a 5 filas con scroll
