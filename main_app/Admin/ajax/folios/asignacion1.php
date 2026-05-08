@@ -1,0 +1,132 @@
+<?php
+if ($folioasig > 500){
+	?>
+<div class="alert alert-danger" role="alert">
+						<button type="button" class="close" data-dismiss="alert"><i class="far fa-times-circle"></i></button>
+						<strong><i class="fas fa-bell"></i> Número de Folio debe de estar entre 1 y 500.</strong>
+
+
+<?php
+
+
+	}else{
+
+$sql = "select * from margi where LibroO = '$libro1'";
+
+$result = mysqli_query($con, $sql);
+
+ if(mysqli_num_rows($result)>0){	
+	 
+
+	
+if (($folioasig%2)==0){
+	
+	?>
+<div class="alert alert-danger" role="alert">
+						<button type="button" class="close" data-dismiss="alert"><i class="far fa-times-circle"></i></button>
+						<strong><i class="fas fa-bell"></i> Solo puedes asigar folios impares.</strong>
+
+
+
+	<?php
+	}else{
+// Realizamos la consulta para saber si coincide con uno de esos criterios
+$consu = "select * from margi where Iniciales1 <> '' AND busquedalf = '$librofolio'";
+$consu2 = "select * from margi where Iniciales1 <> '' AND busquedalf = '$librofolio2'";
+
+
+$result = mysqli_query($con, $consu);
+
+ if(mysqli_num_rows($result)>0)
+ { ?><div>
+	 <div class="alert alert-danger" role="alert">
+						<button type="button" class="close" data-dismiss="alert"><i class="far fa-times-circle"></i></button>
+						<strong><i class="fas fa-bell"></i> Folios <?php echo $librofolio;?> <?php echo $nextfolio;?> no asignados una o más marginaciones ya fueron asignadas a otro usuario.</strong>
+</div></div>
+
+
+<?php 
+
+
+
+
+
+}else
+ {
+
+	if (empty($_POST['inicialesfolio'])){
+		$errors[] = "Campos vacios.";
+	} elseif (!empty($_POST['inicialesfolio'])){
+	require_once ("../conexion.php");//Contiene funcion que conecta a la base de datos
+	// escaping, additionally removing everything that could be (html/javascript-) code
+    
+		$id=intval($_POST['inicialesfolio']);
+	// UPDATE data into database
+		
+					
+	$sql = "UPDATE margi SET Iniciales1 = '$iniciales' WHERE busquedalf = '$librofolio';";
+	$sql .= "UPDATE margi SET Iniciales1 = '$iniciales' WHERE busquedalf = '$nextfolio';";
+
+
+}}
+
+		
+    // if product has been added successfully
+    if (mysqli_multi_query($con,$sql)) {
+        $messages[] = "El folio ".$librofolio." ".$nextfolio.", han sido asignados.";
+      
+    } else {
+        $errors[] = "Lo sentimos, asignación de folios ".$librofolio." ".$nextfolio." fallo. Por favor, regrese y vuelva a intentarlo.";
+        
+    }
+		
+	} }else 
+	{
+		$errors[] = "desconocido.";
+	}
+	
+	
+	
+	
+if (isset($errors)){
+			
+			?>
+						<div class="alert alert-danger" role="alert">
+				<button type="button" class="close" data-dismiss="alert"><i class="far fa-times-circle"></i></button>
+				<strong><i class="fas fa-times-circle"></i> Error!</strong> 
+					<?php
+						 $error = $errors;
+								echo $error;
+							
+						?>
+			</div>
+			<?php
+			}
+			if (isset($messages)){
+				
+				?>
+				<div>
+				<div class="alert alert-success" role="alert">
+						<button type="button" class="close" data-dismiss="alert"><i class="far fa-times-circle"></i></button>
+						<strong><i class="fas fa-check-circle"></i> ¡Bien hecho!</strong>
+						<?php
+							foreach ($messages as $message) {
+									echo $message;
+								}
+							?>
+				</div></div>
+				<?php
+			}else  {	 ?>
+<div class="alert alert-danger" role="alert">
+						<button type="button" class="close" data-dismiss="alert"><i class="far fa-times-circle"></i></button>
+						<strong><i class="fas fa-bell"></i> Libro no existe! Favor digitar el libro en uso.</strong>
+
+	<?php	 
+	 
+}}
+	
+	
+	 
+	 
+?>			
+
